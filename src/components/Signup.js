@@ -1,28 +1,116 @@
 import React from 'react'
+import { TailSpin } from 'react-loader-spinner'
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { RecaptchaVerifier, signInWithPhoneNumber, getAuth } from 'firebase/auth'
+import app from '../firebase/firebase'
+import swal from 'sweetalert'
 
+const auth = getAuth(app)
 const Signup = () => {
+  const [form, setForm] = useState({
+    name: "",
+    mobile: "",
+    password: ""
+  })
+
+  const [loading, setLoading] = useState(false)
+  const [otpSent, setOtpSent] = useState(false)
+   const [OTP, setOTP] = useState("");
+
+   const generateRecaptha = () => {
+    window.recaptchaVerifier = new RecaptchaVerifier(auth, 'recaptcha-container', {
+      'size': 'invisible',
+      'callback': (response) => {
+        // reCAPTCHA solved, allow signInWithPhoneNumber.
+      }
+    }, auth);
+  
+  }
+
+  const requestOtp = () => {
+      setLoading(true);
+      generateRecaptha();
+      let appVerifier = window.recaptchaVerifier;
+        signInWithPhoneNumber(auth, `+91${form.mobile}`, appVerifier)
+        .then(confirmationResult => {
+          window.confirmationResult = confirmationResult;
+          swal({
+            text: "OTP Sent",
+            icon: "success",
+            buttons: false,
+            timer: 3000,
+          });
+          setOtpSent(true);
+          setLoading(false);
+        }).catch((error) => {
+          console.log(error)
+        })
+  }
+
   return (
     <div>
-        <section class="text-gray-600 body-font relative">
-  <div class="container px-5 py-24 mx-auto flex">
-    <div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
-      <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Signup</h2>
-      <p class="leading-relaxed mb-5 text-gray-600">Post-ironic portland shabby chic echo park, banjo fashion axe</p>
-      <div class="relative mb-4">
-        <label for="email" class="leading-7 text-sm text-gray-600">Email</label>
-        <input type="email" id="email" name="email" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"/>
+
+      <div class="container px-5 py-24 mx-auto flex justify-center flex-col items-center">
+        {otpSent ? 
+            <>
+          <div class=" bg-white rounded-lg p-8 flex flex-col">
+            <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Sign Up</h2>
+            <div class="relative mb-4">
+              <label for="Mobile number" class="leading-7 text-sm text-gray-600">OTP</label>
+              <input  
+                value={OTP}
+                onChange={(e) => setOTP(e.target.value)}
+                class="w-full bg-white rounded border border-gray-300
+              focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
+            </div>
+            <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-700 
+                    rounded text-lg">{loading ? <TailSpin height={25} color='white' /> : 'Confirm OTP'}</button>
+          </div>
+        </>
+        :
+        <>
+          <div class=" bg-white rounded-lg p-8 flex flex-col">
+            <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Sign Up</h2>
+            <div class="relative mb-4">
+              <label for="Mobile number" class="leading-7 text-sm text-gray-600">Name</label>
+              <input type="text"
+                name="Name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                class="w-full bg-white rounded border border-gray-300
+              focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
+            </div>
+            <div class="relative mb-4">
+              <label for="Mobile number" class="leading-7 text-sm text-gray-600">Mobile number</label>
+              <input type="number"
+                name="number"
+                value={form.mobile}
+                onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+                class="w-full bg-white rounded border border-gray-300
+              focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
+            </div>
+            <div class="relative mb-4">
+              <label for="password" class="leading-7 text-sm text-gray-600">Password</label>
+              <input type="password"
+                name="email"
+                value={form.password}
+                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                class="w-full bg-white rounded border border-gray-300
+              focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
+            </div>
+            <button onClick={requestOtp} class="text-white bg-red-500 border-0 py-2 mx-24 px-6 focus:outline-none hover:bg-red-700 
+                    rounded text-lg">{loading ? <TailSpin height={25} color='white' /> : 'Request OTP'}</button>
+          </div>
+        </>}
+        <div className='flex flex-col mt-3 text-sm '>
+          <p>Already have an acoount? <Link to={'/login'}><span className='text-blue-500'>Login</span></Link></p>
+        </div>
       </div>
-      <div class="relative mb-4">
-        <label for="message" class="leading-7 text-sm text-gray-600">Message</label>
-        <textarea id="message" name="message" class="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out"></textarea>
-      </div>
-      <button class="text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded text-lg">Button</button>
-      <p class="text-xs text-gray-500 mt-3">Chicharrones blog helvetica normcore iceland tousled brook viral artisan.</p>
-    </div>
-  </div>
-</section>
+          <div id='recaptcha-container'></div>
     </div>
   )
 }
+
 
 export default Signup
