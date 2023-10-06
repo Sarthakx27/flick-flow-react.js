@@ -31,13 +31,15 @@ const Login = () => {
 
                 if(isUser){
                     useAppstate.setLogin(true)
-                    navigate('/')
+                    useAppstate.setUserName(_data.name)
+
                     swal({
                         title: "Logged In",
                         icon: "success",
                         button: false,
                         timer: 1500
                     })
+                    navigate('/')
                 }else{
                     swal({
                         title: "Invalid Credentials",

@@ -142,7 +142,7 @@ const Signup = () => {
           </div>
         </>}
         <div className='flex flex-col mt-3 text-sm '>
-          <p>Already have an acoount? <Link to={'/login'}><span className='text-blue-500'>Login</span></Link></p>
+          <p>Already have an account? <Link to={'/login'}><span className='text-blue-500'>Login</span></Link></p>
         </div>
       </div>
           <div id='recaptcha-container'></div>

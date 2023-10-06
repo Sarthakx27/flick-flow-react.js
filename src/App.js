@@ -11,11 +11,11 @@ const Appstate = createContext()
 
 function App() {
   const [login,  setLogin] =  useState(false)
-  const [username, setUsername] = useState("")
+  const [userName, setUserName] = useState("")
 
   return (
 
-    <Appstate.Provider value={{login, username, setLogin, setUsername}} >
+    <Appstate.Provider value={{login, userName, setLogin, setUserName}} >
     <div className="App relative">
       <Header />
         <Routes>
