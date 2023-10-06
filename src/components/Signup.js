@@ -34,7 +34,7 @@ const Signup = () => {
   const uploadData = async () => {
     try{
       const salt = bcrypt.genSaltSync(10)
-      var hash = bcrypt.hashSync("B4c0/\/", salt)
+      var hash = bcrypt.hashSync(form.password, salt)
       await addDoc(usersRef,{
         name: form.name,
         password: hash,

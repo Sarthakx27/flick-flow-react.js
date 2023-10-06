@@ -35,14 +35,14 @@ const Reviews = ({id, prevRating, usersRated}) => {
                 title: "Review Added",
                 icon: "success",
                 button: false,
-                timer: "3000"
+                timer: 3000
             })
         } catch (error) {
             swal({
                 title: error.message,
                 icon: "error",
                 button: false,
-                timer: "3000"
+                timer: 3000
             })
         }
         setLoading(false)
