@@ -30,7 +30,7 @@ const Card = () => {
             data.map((e,i) => {
             return(
                 <Link to={`/Detail/${e.id}`}><div key={i} className='card shadow-lg p-2 font-semibold text-sm hover:-translate-y-2 cursor-pointer mt-5 transition-all duration-500 w-50'>
-                <img className='h-60 md:h-96 md:min-w-30 md:max-w-30' src={e.image} 
+                <img className='h-60 md:h-96 w-40 md:w-64 ' src={e.image} 
                     ></img>
                 <h1 className='flex flex-col md:block flex-none mt-1 '>{e.title}</h1>
                 <h1 className='flex items-center mt-1 mb-1'><span className='text-red-500 pr-2'>Rating :</span><Stack spacing={0}>
