@@ -29,10 +29,10 @@ const Card = () => {
             {loading ? <div className='infinity'> <InfinitySpin color='red' /> </div>:
             data.map((e,i) => {
             return(
-                <Link to={`/Detail/${e.id}`}><div key={i} className='card shadow-lg p-2 font-bold text-xs md:text-xs hover:-translate-y-2 cursor-pointer mt-5 transition-all duration-500 w-50'>
-                <img className='h-60 md:h-72' src={e.image} 
+                <Link to={`/Detail/${e.id}`}><div key={i} className='card shadow-lg p-2 font-semibold text-sm hover:-translate-y-2 cursor-pointer mt-5 transition-all duration-500 w-50'>
+                <img className='h-60 md:h-96 md:min-w-30 md:max-w-30' src={e.image} 
                     ></img>
-                <h1 className='flex flex-col md:block flex-none mt-1 '><span className='text-red-500 pr-2'>Name :</span> {e.title}</h1>
+                <h1 className='flex flex-col md:block flex-none mt-1 '>{e.title}</h1>
                 <h1 className='flex items-center mt-1 mb-1'><span className='text-red-500 pr-2'>Rating :</span><Stack spacing={0}>
                     <Rating name="half-rating" defaultValue={e.rating/e.rated} precision={0.5} size='small' readOnly emptyIcon={<StarIcon 
                             style={{ opacity: 1, color: "gray" }} fontSize='2' />}

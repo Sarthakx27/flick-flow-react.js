@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import {getFirestore, collection} from 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB_nhEHcjLrhQF7CGZovo13wdYTd6BohwU",
+  apiKey: "AIzaSyB_nhEHcjLrhQF7CGZovo13wdYTd6BohwU", 
   authDomain: "flickflow-86d6f.firebaseapp.com",
   projectId: "flickflow-86d6f",
   storageBucket: "flickflow-86d6f.appspot.com",
