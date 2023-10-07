@@ -20,7 +20,7 @@ const Login = () => {
     const login = async () => {
         setLoading(true)
         try {
-            const quer = query(usersRef, where('mobile','==', form.mobile))
+            const quer = query(usersRef, where('mobile', '==', form.mobile))
             const querySnapshot = await getDocs(quer)
 
             querySnapshot.forEach((doc) => {
@@ -29,7 +29,7 @@ const Login = () => {
                 console.log(form.password)
                 console.log(_data.password)
 
-                if(isUser){
+                if (isUser) {
                     useAppstate.setLogin(true)
                     useAppstate.setUserName(_data.name)
 
@@ -40,13 +40,13 @@ const Login = () => {
                         timer: 1500
                     })
                     navigate('/')
-                }else{
+                } else {
                     swal({
                         title: "Invalid Credentials",
                         icon: "error",
                         button: false,
                         timer: 1500
-                    }) 
+                    })
                 }
             })
 
@@ -68,25 +68,25 @@ const Login = () => {
                     <h2 class="text-gray-900 text-lg mb-1 font-medium title-font">Login</h2>
                     <div class="relative mb-4">
                         <label for="Mobile number" class="leading-7 text-sm text-gray-600">Mobile number</label>
-                        <input type="number" 
-                        name="email" 
-                        value={form.mobile}
-                        onChange={(e) => setForm({ ...form, mobile: e.target.value })}
-                        class="w-full bg-white rounded border border-gray-300
+                        <input type="number"
+                            name="email"
+                            value={form.mobile}
+                            onChange={(e) => setForm({ ...form, mobile: e.target.value })}
+                            class="w-full bg-white rounded border border-gray-300
                          focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
                     </div>
                     <div class="relative mb-4">
                         <label for="password" class="leading-7 text-sm text-gray-600">Password</label>
-                        <input type="password" 
-                        name="email" 
-                        value={form.password}
-                        onChange={(e) => setForm({ ...form, password: e.target.value })}
-                        class="w-full bg-white rounded border border-gray-300
+                        <input type="password"
+                            name="email"
+                            value={form.password}
+                            onChange={(e) => setForm({ ...form, password: e.target.value })}
+                            class="w-full bg-white rounded border border-gray-300
                          focus:border-red-500  focus:ring-1  text-base outline-none text-gray-700 py-1 px-3 " />
                     </div>
-                    <button 
-                     onClick={login}
-                     class="text-white bg-red-500 border-0 mx-24 py-2 px-6 focus:outline-none hover:bg-red-700 
+                    <button
+                        onClick={login}
+                        class="text-white bg-red-500 border-0 mx-24 py-2 px-6 focus:outline-none hover:bg-red-700 
                     rounded text-lg">{loading ? <TailSpin height={25} color='white' /> : 'Login'}</button>
                 </div>
                 <div className='flex flex-col mt-3 text-sm '>
