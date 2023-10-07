@@ -29,16 +29,15 @@ const Card = () => {
             {loading ? <div className='infinity'> <InfinitySpin color='red' /> </div> :
                 data.map((e, i) => {
                     return (
-                        <Link to={`/Detail/${e.id}`}><div key={i} className='card shadow-lg p-2 font-semibold text-sm hover:-translate-y-2 cursor-pointer mt-5 transition-all duration-500 w-50'>
-                            <img className='h-60 md:h-96 w-40 md:w-64 ' src={e.image}
-                            ></img>
-                            <h1 className='flex flex-col md:block flex-none mt-1 '>{e.title}</h1>
-                            <h1 className='flex items-center mt-1 mb-1'><span className='text-red-500 pr-2'>Rating :</span><Stack spacing={0}>
+                        <Link to={`/Detail/${e.id}`}><div key={i} className='card shadow-lg p-2 font-semibold text-sm hover:-translate-y-2 cursor-pointer mt-5 transition-all duration-500 w-44 md:w-72'>
+                            <img className='h-60 md:h-96 w-40 md:w-64 ml-2' src={e.image}/>
+                            <h1 className='flex flex-col md:block flex-none mt-1 ml-1'>{e.title}</h1>
+                            <h1 className='flex items-center ml-1 mt-1 mb-1'><span className='text-red-500 pr-2'>Rating :</span><Stack spacing={0}>
                                 <Rating name="half-rating" defaultValue={e.rating / e.rated} precision={0.5} size='small' readOnly emptyIcon={<StarIcon
                                     style={{ opacity: 1, color: "gray" }} fontSize='2' />}
                                 />
                             </Stack></h1>
-                            <h1><span className='text-red-500 pr-2'>Year :</span> {e.year}</h1>
+                            <h1><span className='text-red-500 ml-1 pr-2'>Year :</span> {e.year}</h1>
                         </div></Link>
                     )
                 })
