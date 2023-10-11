@@ -90,7 +90,7 @@ const Login = () => {
                     rounded text-lg">{loading ? <TailSpin height={25} color='white' /> : 'Login'}</button>
                 </div>
                 <div className='flex flex-col mt-3 text-sm '>
-                    <p>Do not have acoount? <Link to={'/signup'}><span className='text-blue-500'>Sign Up</span></Link></p>
+                    <p>Do not have an account? <Link to={'/signup'}><span className='text-blue-500'>Sign Up</span></Link></p>
                 </div>
             </div>
 
