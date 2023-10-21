@@ -65,6 +65,10 @@ const Signup = () => {
   }
 
   const requestOtp = () => {
+    if(form.name.length === 0 || form.mobile.length === 0 || form.password.length === 0){
+      alert('Field cannot be empty!!!')
+    }
+    else{
     setLoading(true);
     generateRecaptha();
     let appVerifier = window.recaptchaVerifier;
@@ -82,6 +86,7 @@ const Signup = () => {
       }).catch((error) => {
         console.log(error)
       })
+    }
   }
 
   return (
